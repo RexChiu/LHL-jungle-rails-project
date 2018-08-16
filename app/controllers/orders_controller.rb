@@ -1,5 +1,6 @@
-class OrdersController < ApplicationController
+# frozen_string_literal: true
 
+class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
   end
@@ -14,7 +15,6 @@ class OrdersController < ApplicationController
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end
-
   rescue Stripe::CardError => e
     redirect_to cart_path, flash: { error: e.message }
   end
@@ -42,15 +42,14 @@ class OrdersController < ApplicationController
       stripe_charge_id: stripe_charge.id, # returned by stripe
     )
     cart.each do |product_id, details|
-      if product = Product.find_by(id: product_id)
-        quantity = details['quantity'].to_i
-        order.line_items.new(
-          product: product,
-          quantity: quantity,
-          item_price: product.price,
-          total_price: product.price * quantity
-        )
-      end
+      next unless product = Product.find_by(id: product_id)
+      quantity = details['quantity'].to_i
+      order.line_items.new(
+        product: product,
+        quantity: quantity,
+        item_price: product.price,
+        total_price: product.price * quantity
+      )
     end
     order.save!
     order
@@ -66,5 +65,4 @@ class OrdersController < ApplicationController
     end
     total
   end
-
 end
