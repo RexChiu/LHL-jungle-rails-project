@@ -2,7 +2,7 @@
 
 class OrderMailerPreview < ActionMailer::Preview
   def order_receipt_email
-    @order = Order.find(3)
+    @order = Order.find(5)
     OrderMailer.order_receipt_email(@order)
   end
 end
