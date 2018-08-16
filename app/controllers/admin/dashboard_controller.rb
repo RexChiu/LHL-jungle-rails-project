@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class Admin::DashboardController < ApplicationController
-  def show
-  end
+  http_basic_authenticate_with name: Rails.configuration.admin[:username], password: Rails.configuration.admin[:password]
+
+  def show; end
 end
