@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::ProductsController < ApplicationController
-  http_basic_authenticate_with name: Rails.configuration.admin[:username], password: Rails.configuration.admin[:password]
-
+class Admin::ProductsController < Admin::AdminController
   def index
     @products = Product.order(id: :desc).all
   end
