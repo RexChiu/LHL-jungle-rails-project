@@ -159,29 +159,29 @@ puts "Re-creating Reviews ..."
 Review.destroy_all
 
 review1 = Review.create!({
-  product_id: 0,
-  user_id: 0,
+  product_id: 1,
+  user_id: 1,
   description: 'Not Cats Enough.',
   rating: 1
 })
 
 review2 = Review.create!({
-  product_id: 0,
-  user_id: 1,
+  product_id: 1,
+  user_id: 2,
   description: 'All the Dogs.',
   rating: 5
 })
 
 review3 = Review.create!({
-  product_id: 1,
-  user_id: 0,
+  product_id: 2,
+  user_id: 1,
   description: 'All the Cats.',
   rating: 5
 })
 
 review4 = Review.create!({
-  product_id: 2,
-  user_id: 1,
+  product_id: 3,
+  user_id: 2,
   description: 'Not Dogs Enough.',
   rating: 1
 })
