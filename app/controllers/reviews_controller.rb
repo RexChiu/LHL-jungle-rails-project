@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    user_id = current_user ? current_user.id : -1
+    user_id = current_user.id
     puts "User ID: #{user_id}"
     puts "Current User: #{current_user}"
     params.require(:review).permit(
