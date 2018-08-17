@@ -49,6 +49,8 @@
         <%= form.select :rating, options_for_select(1..5) %>
       </div>
 
+      <%= hidden_field_tag :product_id, @product.id %>
+
       <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
     <% end %>
     <hr>
