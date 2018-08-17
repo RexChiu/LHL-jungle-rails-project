@@ -1,0 +1,10 @@
+<% user = User.find_by(id: review.user_id) %>
+<div>
+  <dt>Reviewer</dt>
+  <dd><%= user.first_name %></dd>
+  <dt>Description</dt>
+  <dd><%= review.description %></dd>
+  <dt>rating</dt>
+  <dd><%= review.rating %></dd>
+  <br>
+</div>
