@@ -132,5 +132,58 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+## USERS
+
+puts "Re-creating Users ..."
+
+User.destroy_all
+
+user1 = User.create!({
+  first_name: 'Cats',
+  last_name: 'Cats',
+  email: 'Cats',
+  password_digest: '$2a$10$sfBMAmH1S2fi850v7XRED.79jy8zt7g/WZKNvmaYWfKmI5BpZL8iG'
+})
+
+user2 = User.create!({
+  first_name: 'Dogs',
+  last_name: 'Dogs',
+  email: 'Dogs',
+  password_digest: '$2a$10$sfBMAmH1S2fi850v7XRED.79jy8zt7g/WZKNvmaYWfKmI5BpZL8iG'
+})
+
+## REVIEWS
+
+puts "Re-creating Reviews ..."
+
+Review.destroy_all
+
+review1 = Review.create!({
+  product_id: 0,
+  user_id: 0,
+  description: 'Not Cats Enough.',
+  rating: 1
+})
+
+review2 = Review.create!({
+  product_id: 0,
+  user_id: 1,
+  description: 'All the Dogs.',
+  rating: 5
+})
+
+review3 = Review.create!({
+  product_id: 1,
+  user_id: 0,
+  description: 'All the Cats.',
+  rating: 5
+})
+
+review4 = Review.create!({
+  product_id: 2,
+  user_id: 1,
+  description: 'Not Dogs Enough.',
+  rating: 1
+})
 
 puts "DONE!"
