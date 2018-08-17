@@ -1,7 +1,10 @@
-<% user = User.find_by(id: review.user_id) %>
 <div>
   <dt>Reviewer</dt>
-  <dd><%= user.first_name %></dd>
+  <% if user = User.find_by(id: review.user_id) %>
+    <dd><%= user.first_name %></dd>
+  <% else %>
+    <dd>AnonyCats</dd>
+  <% end %>
   <dt>Description</dt>
   <dd><%= review.description %></dd>
   <dt>rating</dt>
