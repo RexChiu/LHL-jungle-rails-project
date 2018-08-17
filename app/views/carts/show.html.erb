@@ -4,6 +4,7 @@
     <h1>My Cart</h1>
   </header>
 
+  <% if cart.length.positive? %>
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -39,25 +40,25 @@
     <% @user_email = "Cats@jungle.com" %>
   <% end %>
 
-  <% if cart.length.positive? %>
-    <div class="row">
-      <div class="col-xs-12">
-        <%= form_tag orders_path do %>
-          <script
-            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-amount="<%= @cart_total * 100 %>"
-            data-name="Jungle"
-            data-description="Customer's Jungle Order"
-            data-locale="auto"
-            data-email=<% @user_email %>
-            data-currency="cad">
-          </script>
-        <% end %>
-      </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <%= form_tag orders_path do %>
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-amount="<%= @cart_total * 100 %>"
+          data-name="Jungle"
+          data-description="Customer's Jungle Order"
+          data-locale="auto"
+          data-email=<% @user_email %>
+          data-currency="cad">
+        </script>
+      <% end %>
     </div>
-  <% else %>
-    <%= link_to 'Your Cart is Empty, Go back to Home.', :root %>
-  <% end %>
+  </div>
+  
+<% else %>
+  <%= link_to 'Your Cart is Empty, Go back to Home.', :root %>
+<% end %>
 
 </section>
