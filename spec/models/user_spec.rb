@@ -12,39 +12,51 @@ RSpec.describe User, type: :model do
     it 'should be invalid without a first name' do
       @user = User.new(last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
       expect(@user.valid?).to eq(false)
+      expect(@user.errors.full_messages).to eq(["First name can't be blank"])
     end
 
     it 'should be invalid without a last name' do
       @user = User.new(first_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
       expect(@user.valid?).to eq(false)
+      expect(@user.errors.full_messages).to eq(["Last name can't be blank"])
     end
 
     it 'should be invalid without an email' do
       @user = User.new(first_name: 'Cats', last_name: 'Cats', password: 'Cats', password_confirmation: 'Cats')
       expect(@user.valid?).to eq(false)
+      expect(@user.errors.full_messages).to eq(["Email can't be blank"])
     end
 
     it 'should be invalid without a password' do
       @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password_confirmation: 'Dogs')
       expect(@user.valid?).to eq(false)
+      expect(@user.errors.full_messages).to eq(["Password can't be blank", 'Password is too short (minimum is 3 characters)', "Password can't be blank"])
     end
 
     it 'should be invalid without a password confirmation' do
       @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats')
       expect(@user.valid?).to eq(false)
+      expect(@user.errors.full_messages).to eq(["Password confirmation can't be blank"])
     end
 
     it 'should be invalid without matching passwords' do
       @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Dogs')
       expect(@user.valid?).to eq(false)
+      expect(@user.errors.full_messages).to eq(["Password confirmation doesn't match Password"])
     end
 
     it 'should not allow repeated emails' do
       @user = User.create(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
-      @user1 = User.create(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
-      expect(@user1).to eq(nil)
+      @user1 = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.cats', password: 'Cats', password_confirmation: 'Cats')
+      expect(@user1.valid?).to eq(false)
+      expect(@user1.errors.full_messages).to eq(["Email has already been taken"])
       @user.destroy
-      @user1.destroy
+    end
+
+    it 'should not allow password lengths under 3' do
+      @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.cats', password: 'C', password_confirmation: 'C')
+      expect(@user.valid?).to eq(false)
+      expect(@user.errors.full_messages).to eq(['Password is too short (minimum is 3 characters)'])
     end
   end
 end
