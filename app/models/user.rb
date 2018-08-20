@@ -7,5 +7,13 @@ class User < ActiveRecord::Base
   validates :password, presence: true
   validates :password_confirmation, presence: true
 
+  before_save :downcase_email
+
   has_secure_password
+
+  private
+
+  def downcase_email
+    self.email = email.downcase
+  end
 end

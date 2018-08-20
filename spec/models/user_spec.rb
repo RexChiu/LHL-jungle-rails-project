@@ -38,5 +38,13 @@ RSpec.describe User, type: :model do
       @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Dogs')
       expect(@user.valid?).to eq(false)
     end
+
+    it 'should not allow repeated emails' do
+      @user = User.create(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
+      @user1 = User.create(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
+      expect(@user1).to eq(nil)
+      @user.destroy
+      @user1.destroy
+    end
   end
 end
