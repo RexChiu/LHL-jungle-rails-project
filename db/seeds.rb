@@ -6,11 +6,21 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+require 'cloudinary'
+require 'cloudinary/uploader'
+require 'cloudinary/utils'
+
 puts "Seeding Data ..."
 
 # Helper functions
+# def open_asset(file_name)
+#   File.open(Rails.root.join('db', 'seed_assets', file_name))
+# end
+
 def open_asset(file_name)
-  File.open(Rails.root.join('db', 'seed_assets', file_name))
+  img = Cloudinary::Uploader.upload(Rails.root.join('db', 'seed_assets', file_name))
+  puts img['url']
+  img['url']
 end
 
 # Only run on development (local) instances not on production, etc.

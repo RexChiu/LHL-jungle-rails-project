@@ -32,6 +32,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'
 gem 'money-rails'
 gem 'carrierwave'
+gem 'cloudinary'
 gem 'rmagick'
 gem 'stripe'
 gem 'faker'
@@ -58,5 +59,4 @@ end
 group :production do
   gem 'newrelic_rpm'
   gem 'rails_12factor'
-  gem 'cloudinary'
 end
