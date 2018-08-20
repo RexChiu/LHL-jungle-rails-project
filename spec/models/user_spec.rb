@@ -9,6 +9,21 @@ RSpec.describe User, type: :model do
       expect(@user.valid?).to eq(true)
     end
 
+    it 'should be invalid without a first name' do
+      @user = User.new(last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
+      expect(@user.valid?).to eq(false)
+    end
+
+    it 'should be invalid without a last name' do
+      @user = User.new(first_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
+      expect(@user.valid?).to eq(false)
+    end
+
+    it 'should be invalid without an email' do
+      @user = User.new(first_name: 'Cats', last_name: 'Cats', password: 'Cats', password_confirmation: 'Cats')
+      expect(@user.valid?).to eq(false)
+    end
+
     it 'should be invalid without a password' do
       @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password_confirmation: 'Dogs')
       expect(@user.valid?).to eq(false)
