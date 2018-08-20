@@ -49,12 +49,12 @@ RSpec.describe User, type: :model do
       @user = User.create(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
       @user1 = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.cats', password: 'Cats', password_confirmation: 'Cats')
       expect(@user1.valid?).to eq(false)
-      expect(@user1.errors.full_messages).to eq(["Email has already been taken"])
+      expect(@user1.errors.full_messages).to eq(['Email has already been taken'])
       @user.destroy
     end
 
     it 'should not allow password lengths under 3' do
-      @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.cats', password: 'C', password_confirmation: 'C')
+      @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'C', password_confirmation: 'C')
       expect(@user.valid?).to eq(false)
       expect(@user.errors.full_messages).to eq(['Password is too short (minimum is 3 characters)'])
     end
