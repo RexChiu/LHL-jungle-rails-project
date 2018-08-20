@@ -5,16 +5,18 @@ require 'rails_helper'
 RSpec.describe Product, type: :model do
   context 'Validations' do
     before :each do
-      @category = Category.new(name: 'test_category')
+      @category = Category.create(name: 'test_category')
     end
 
     after :each do
+      @category.destroy
       @product.destroy
     end
 
     it 'should be created correctly' do
       expect(Product.count).to eq(0)
       @product = Product.create(name: 'test_product', description: 'testing', image: 'test_url', price_cents: 1000, quantity: 10, category: @category)
+      expect(@product.valid?).to eq(true)
       expect(Product.count).to eq(1)
     end
 

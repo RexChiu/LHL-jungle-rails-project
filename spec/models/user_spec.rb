@@ -59,4 +59,19 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to eq(['Password is too short (minimum is 3 characters)'])
     end
   end
+
+  context '.authenticate_with_credentials' do
+    before :each do
+      @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
+    end
+
+    after :each do
+      @user.destroy
+    end
+
+    it 'should login with correct email and password' do
+      successful_login = User.authenticate_with_credentials(@user.email, @user.password)
+      expect(successful_login).to eq(@user)
+    end
+  end
 end
