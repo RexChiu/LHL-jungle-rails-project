@@ -70,8 +70,13 @@ RSpec.describe User, type: :model do
     end
 
     it 'should login with correct email and password' do
-      successful_login = User.authenticate_with_credentials(@user.email, @user.password)
-      expect(successful_login).to eq(@user)
+      login = User.authenticate_with_credentials(@user.email, @user.password)
+      expect(login).to eq(@user)
+    end
+
+    it 'should not login with incorrect email' do
+      login = User.authenticate_with_credentials('invalid_email', @user.password)
+      expect(login).to eq(nil)
     end
   end
 end
