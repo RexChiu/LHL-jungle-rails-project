@@ -13,21 +13,21 @@ require 'cloudinary/utils'
 puts "Seeding Data ..."
 
 # Helper functions
-# def open_asset(file_name)
-#   File.open(Rails.root.join('db', 'seed_assets', file_name))
-# end
-
 def open_asset(file_name)
-  img = Cloudinary::Uploader.upload(Rails.root.join('db', 'seed_assets', file_name))
-  puts img['url']
-  img['url']
+  File.open(Rails.root.join('db', 'seed_assets', file_name))
 end
 
-# Only run on development (local) instances not on production, etc.
-# unless Rails.env.development?
-#   puts "Development seeds only (for now)!"
-#   exit 0
+# def open_asset(file_name)
+#   img = Cloudinary::Uploader.upload(Rails.root.join('db', 'seed_assets', file_name))
+#   puts img['url']
+#   img['url']
 # end
+
+# Only run on development (local) instances not on production, etc.
+unless Rails.env.development?
+  puts "Development seeds only (for now)!"
+  exit 0
+end
 
 # Let's do this ...
 
