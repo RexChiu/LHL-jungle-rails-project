@@ -9,8 +9,8 @@ RSpec.describe Product, type: :model do
     end
 
     after :each do
-      @category.destroy
       @product.destroy
+      @category.destroy
     end
 
     it 'should be created correctly' do
@@ -24,7 +24,7 @@ RSpec.describe Product, type: :model do
       expect(Product.count).to eq(0)
       @product = Product.create(description: 'testing', image: 'test_url', price_cents: 1000, quantity: 10, category: @category)
       expect(@product.valid?).to eq(false)
-      expect(@product.errors.full_messages).to eq(["Name can't be blank"])
+      expect(@product.errors.full_messages).to include("Name can't be blank")
       expect(Product.count).to eq(0)
     end
 
@@ -32,7 +32,7 @@ RSpec.describe Product, type: :model do
       expect(Product.count).to eq(0)
       @product = Product.create(name: 'test_product', description: 'testing', image: 'test_url', quantity: 10, category: @category)
       expect(@product.valid?).to eq(false)
-      expect(@product.errors.full_messages).to eq(['Price cents is not a number', 'Price is not a number', "Price can't be blank"])
+      expect(@product.errors.full_messages).to include('Price cents is not a number', 'Price is not a number', "Price can't be blank")
       expect(Product.count).to eq(0)
     end
 
@@ -40,7 +40,7 @@ RSpec.describe Product, type: :model do
       expect(Product.count).to eq(0)
       @product = Product.new(name: 'test_product', description: 'testing', image: 'test_url', price_cents: 1000, category: @category)
       expect(@product.valid?).to eq(false)
-      expect(@product.errors.full_messages).to eq(["Quantity can't be blank"])
+      expect(@product.errors.full_messages).to include("Quantity can't be blank")
       expect(Product.count).to eq(0)
     end
 
@@ -48,7 +48,7 @@ RSpec.describe Product, type: :model do
       expect(Product.count).to eq(0)
       @product = Product.new(name: 'test_product', description: 'testing', image: 'test_url', price_cents: 1000, quantity: 10)
       expect(@product.valid?).to eq(false)
-      expect(@product.errors.full_messages).to eq(["Category can't be blank"])
+      expect(@product.errors.full_messages).to include("Category can't be blank")
       expect(Product.count).to eq(0)
     end
   end
