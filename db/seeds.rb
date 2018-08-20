@@ -142,14 +142,16 @@ user1 = User.create!({
   first_name: 'Cats',
   last_name: 'Cats',
   email: 'Cats@Cats.Cats',
-  password_digest: '$2a$10$sfBMAmH1S2fi850v7XRED.79jy8zt7g/WZKNvmaYWfKmI5BpZL8iG' #Cats
+  password: 'Cats',
+  password_confirmation: 'Cats'
 })
 
 user2 = User.create!({
   first_name: 'Dogs',
   last_name: 'Dogs',
   email: 'Dogs@Dogs.Dogs',
-  password_digest: '$2a$10$P4ZZG6ruhf3QbUTzXkzCieb.yF/TVvDAOFIz2p3IrVyIaT/eLsyOm' #Dogs
+  password: 'Dogs',
+  password_confirmation: 'Dogs'
 })
 
 ## REVIEWS
