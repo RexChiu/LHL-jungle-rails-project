@@ -84,4 +84,19 @@ RSpec.describe User, type: :model do
       expect(login).to eq(nil)
     end
   end
+
+  context 'edge cases' do
+    before :each do
+      @user = User.create(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
+    end
+
+    after :each do
+      @user.destroy
+    end
+
+    it 'should login with correct case insensitive email and password' do
+      login = User.authenticate_with_credentials('cats@cats.cats', @user.password)
+      expect(login).to eq(@user)
+    end
+  end
 end
