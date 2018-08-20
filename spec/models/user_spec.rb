@@ -30,7 +30,7 @@ RSpec.describe User, type: :model do
     it 'should be invalid without a password' do
       @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password_confirmation: 'Dogs')
       expect(@user.valid?).to eq(false)
-      expect(@user.errors.full_messages).to eq(["Password can't be blank", 'Password is too short (minimum is 3 characters)', "Password can't be blank"])
+      expect(@user.errors.full_messages.include?("Password can't be blank")).to eq(true)
     end
 
     it 'should be invalid without a password confirmation' do
@@ -62,7 +62,7 @@ RSpec.describe User, type: :model do
 
   context '.authenticate_with_credentials' do
     before :each do
-      @user = User.new(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
+      @user = User.create(first_name: 'Cats', last_name: 'Cats', email: 'Cats@Cats.Cats', password: 'Cats', password_confirmation: 'Cats')
     end
 
     after :each do
