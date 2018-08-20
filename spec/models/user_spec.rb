@@ -94,6 +94,11 @@ RSpec.describe User, type: :model do
       @user.destroy
     end
 
+    it 'should login with extra whitespace email and password' do
+      login = User.authenticate_with_credentials('      Cats@Cats.Cats        ', @user.password)
+      expect(login).to eq(@user)
+    end
+
     it 'should login with correct case insensitive email and password' do
       login = User.authenticate_with_credentials('cats@cats.cats', @user.password)
       expect(login).to eq(@user)
