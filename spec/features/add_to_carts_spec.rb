@@ -21,7 +21,7 @@ RSpec.feature 'Add To Cart', type: :feature, js: true do
 
     click_link 'Add'
 
-    expect(find('a', text: 'My Cart (1)')).not_to eq(nil)
+    expect(page).to have_content('My Cart (1)')
 
     # DEBUG / VERIFY
     save_screenshot
