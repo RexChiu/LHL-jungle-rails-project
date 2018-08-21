@@ -19,8 +19,6 @@ end
 
 # def open_asset(file_name)
 #   img = Cloudinary::Uploader.upload(Rails.root.join('db', 'seed_assets', file_name))
-#   puts img['url']
-#   img['url']
 # end
 
 # Only run on development (local) instances not on production, etc.
