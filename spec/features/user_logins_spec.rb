@@ -25,7 +25,7 @@ RSpec.feature 'UserLogins', type: :feature, js: true do
     fill_in 'password', with: 'Cats'
     click_on 'Submit'
 
-    expect(find('h1', text: 'Products')).not_to eq(nil)
+    expect(page).to have_content("Signed in as Cats")
 
     # DEBUG / VERIFY
     save_screenshot
