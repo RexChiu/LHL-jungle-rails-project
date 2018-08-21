@@ -22,7 +22,6 @@ RSpec.feature 'ProductDetails', type: :feature, js: true do
     # ACT
     visit root_path
 
-    puts @category.products.last.name
     click_on @category.products.last.name
 
     expect(find('.products-show')).not_to eq(nil)
